@@ -68,24 +68,10 @@
 <li>policy: policy is the agen’s behavior, it’s a map from action to   m,state, and it’s always represented by <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\pi" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\pi" title="\pi"></a>. By deterministic policy, <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;a=\pi&space;(s)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;a=\pi&space;(s)" title="a=\pi (s)"></a>. By stochastic policy, <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\pi&space;(a|s)=\mathbb{P}[A_{t}=a|S_{t}=s]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\pi&space;(a|s)=\mathbb{P}[A_{t}=a|S_{t}=s]" title="\pi (a|s)=\mathbb{P}[A_{t}=a|S_{t}=s]"></a>.     </li>
 <li>value function: value function is a prediction of future reward, it’s used to evaluate the goodness/badness of states and therefore to select between actions.<br><a href="https://www.codecogs.com/eqnedit.php?latex=V_{\pi&space;}(s)=E_{\pi&space;}[R_{t&plus;1}&plus;\gamma&space;R_{t&plus;2}&plus;\gamma&space;^{2}R_{t&plus;3}&plus;...|S_{t}=s&space;]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?V_{\pi&space;}(s)=E_{\pi&space;}[R_{t&plus;1}&plus;\gamma&space;R_{t&plus;2}&plus;\gamma&space;^{2}R_{t&plus;3}&plus;...|S_{t}=s&space;]" title="V_{\pi }(s)=E_{\pi }[R_{t+1}+\gamma R_{t+2}+\gamma ^{2}R_{t+3}+...|S_{t}=s ]"></a>   </li>
 <li><p>model:A model predicts what the environment will do next, P predicts the next state, R predicts the next (immediate) reward.<br><a href="https://www.codecogs.com/eqnedit.php?latex=P_{ss'}^{a}=\mathbb{P}[S_{t&plus;1}=s'|S_{t}=s,A_{t}=a]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{ss'}^{a}=\mathbb{P}[S_{t&plus;1}=s'|S_{t}=s,A_{t}=a]" title="P_{ss'}^{a}=\mathbb{P}[S_{t+1}=s'|S_{t}=s,A_{t}=a]"></a><br><a href="https://www.codecogs.com/eqnedit.php?latex=R_{s}^{a}=E[R_{t&plus;1}|S_{t}=s,A_{t}=a]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?R_{s}^{a}=E[R_{t&plus;1}|S_{t}=s,A_{t}=a]" title="R_{s}^{a}=E[R_{t+1}|S_{t}=s,A_{t}=a]"></a><br>These can be sum up as a picture:<br><img src="./5.png" alt="Alt text"><br>At last, I talk about RL agent categorization. According to the value function, the agent can be divided into three categories, value based, policy based, actor-critic. As shown in the table:  </p>
-<p>| value based  | No Policy (Implicit), Value Function |<br>| ————- |:————-:|<br>| policy based | Policy, No Value Function |<br>| actor-critic | Policy, Value Function |  </p>
+<p>|–|–|<br>| value based  | No Policy (Implicit), Value Function |<br>| policy based | Policy, No Value Function |<br>| actor-critic | Policy, Value Function |  </p>
 </li>
 </ul>
-<p>According to the value function, the agent can be divided into two categories, model free and model based.  </p>
-<table>
-<thead>
-<tr>
-<th>model free</th>
-<th style="text-align:center">Policy and/or Value Function, No Model</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>policy based</td>
-<td style="text-align:center">Policy and/or Value Function Model</td>
-</tr>
-</tbody>
-</table>
+<p>According to the value function, the agent can be divided into two categories, model free and model based.<br> |–|–|<br> | model free | Policy and/or Value Function, No Model |<br> | policy based | Policy and/or Value Function Model |  </p>
 <p>I will discuss these in detail in later chapters.<br>Here, the basics of reinforcement learning have been introduced. Do you still remenber the question mentioned at beginning? yes, the differences between RL and other machine learning. We can conclude the following:  </p>
 <ul>
 <li>There is no supervisor, only a reward signal  </li>
