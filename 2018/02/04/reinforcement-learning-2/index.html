@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="https://zhanggengzhi.github.io/gengzhi.github.com/assets/head.jpg"/>
+        <link rel="canonical" href="http://guolinn.com/">
+        <link rel="alternate" type="application/rss+xml" title="GengZhi" href="/atom.xml">
+        <title>reinforcement learning(2) | GengZhi&#39;s Blog</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/gengzhi.github.com/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/gengzhi.github.com/"><img src="https://zhanggengzhi.github.io/gengzhi.github.com/assets/head.jpg" alt="GengZhi's Blog" /></a>
+            <h1><a href="/gengzhi.github.com/">GengZhi</a></h1>
+            <p></p>
+            <div id="follow-icons">
+                  <a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
+  </div>
+<h6><a href="/gengzhi.github.com/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  February 4, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/gengzhi.github.com/tags/learning-record/'>learning record</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">reinforcement learning(2)</h1>
+  <section class="post-content article-entry">
+    <h3 id="Dynamic-programming"><a href="#Dynamic-programming" class="headerlink" title="Dynamic programming"></a>Dynamic programming</h3><p>In the last article, I introduce the basic knowledges of RL and MPDs. We can find that the problems of reinforcement learning are brought into the framework of MDPs.A Markov decision process is a 5-tuple <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;(S,A,P,R,\gamma&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;(S,A,P,R,\gamma&space;)" title="(S,A,P,R,\gamma )"></a>, where <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;S" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;S" title="S"></a> is a finite set of states; <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;A" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;A" title="A"></a> is a finite set of actions; <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;P" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;P" title="P"></a> is transition probability; <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;R" title="R"></a> is the immediate reward (or expected immediate reward) received after transitioning from state s to state s’, due to action a; <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\gamma" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\gamma" title="\gamma"></a> is the discount factor, which represents the difference in importance between future rewards and present rewards. The goal of reinforcement learning is to find the best strategy <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\pi" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\pi" title="\pi"></a> to maximize the expectation of the cumulative return. <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;R(\tau&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;R(\tau&space;)" title="R(\tau )"></a> is a random variable, and the random variable cannot be optimized. It can not be regarded as the objective function, and the expectation of the random variable is used as the objective function, <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\int&space;R(\tau)p_{\pi&space;}d\tau" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\int&space;R(\tau)p_{\pi&space;}d\tau" title="\int R(\tau)p_{\pi }d\tau"></a>.<br>Today, I’m going to talk about is to use the idea of dynamic programming to solve the model-based reinforcement learning problems. What are the model-based and no-model? They are distinguished by whether the transition probability is known. The transition probability is known means that the model is known. What we are going to do is to do prediction according to the model we have known. So, this is model-based. No-model is on the contrary, transition probability is unkown. Then, we also need to learn something about dynamic programming. Dynamic means the change of sequence and status, programming means optimization. Dynamic Programming is a very general solution method for problems which have two properties:1)optimal solution can be decomposed into subproblems 2)subproblems recur many times<br>Solutions can be cached and reused.<br><a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{t=0}^{\infty&space;}\gamma&space;^{t}R_{a_{t}}(s_{t},s_{t&plus;1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{t=0}^{\infty&space;}\gamma&space;^{t}R_{a_{t}}(s_{t},s_{t&plus;1})" title="\sum_{t=0}^{\infty }\gamma ^{t}R_{a_{t}}(s_{t},s_{t+1})"></a> (where we choose <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;a_{t}=\pi&space;(\pi&space;(S_{t}))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;a_{t}=\pi&space;(\pi&space;(S_{t}))" title="a_{t}=\pi (\pi (S_{t}))"></a>)</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>GengZhi</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/gengzhi.github.com/2018/01/30/reinforcement-learning-1/">
+        <!--reinforcement learning(1)--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2018 GengZhi. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+        </footer>
+    </body>
+</html>
+
+
