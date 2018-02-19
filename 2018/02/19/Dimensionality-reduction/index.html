@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="https://zhanggengzhi.github.io/gengzhi.github.com/assets/head.jpg"/>
+        <link rel="canonical" href="http://guolinn.com/">
+        <link rel="alternate" type="application/rss+xml" title="GengZhi" href="/atom.xml">
+        <title>Dimensionality reduction | GengZhi&#39;s Blog</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/gengzhi.github.com/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/gengzhi.github.com/"><img src="https://zhanggengzhi.github.io/gengzhi.github.com/assets/head.jpg" alt="GengZhi's Blog" /></a>
+            <h1><a href="/gengzhi.github.com/">GengZhi</a></h1>
+            <p></p>
+            <div id="follow-icons">
+                  <a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
+  </div>
+<h6><a href="/gengzhi.github.com/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  February 19, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/gengzhi.github.com/tags/Dimensionality-Reduction/'>Dimensionality Reduction</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">Dimensionality reduction</h1>
+  <section class="post-content article-entry">
+    <p>This artical is mainly based on paper, namely dimensionality reduction: a comparative<br>review written by Laurens van der Maaten and some other related information.  </p>
+<h2 id="Manifold-learning"><a href="#Manifold-learning" class="headerlink" title="Manifold learning"></a>Manifold learning</h2><p>This article will focus on dimensionality reduction. But before that, we should learn some conceptions about manifold learning. What is the manifold? A manifold is descirbed on wiki as a topological space that locally resembles Euclidean space near each point. More precisely, each point of an n-dimensional manifold has a neighbourhood that is homeomorphic to the Euclidean space of dimension n. This is a really unintelligible defination. We can understand better from an example.<br><img src="./1.png" alt="Alt text">  <img src="./2.png" alt="Alt text"><br>The earth can be regarded as a sphere, a two-dimensional manifold, and at one point in the earth, the surrounding area can be regarded as a plane which can be seen as a Euclidean space.<br>There are three types of machine learning problems based on the manifold hypothesis. we defind <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;M\subset&space;R^{N}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;M\subset&space;R^{N}" title="M\subset R^{N}"></a>:  </p>
+<ul>
+<li>Cluster: <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;f:M\rightarrow\begin{Bmatrix}&space;1,&...&,k&space;\end{Bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;f:M\rightarrow\begin{Bmatrix}&space;1,&...&,k&space;\end{Bmatrix}" title="f:M\rightarrow\begin{Bmatrix} 1,&...&,k \end{Bmatrix}"></a>  </li>
+<li>Classification / regression: <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;f:M\rightarrow\begin{Bmatrix}&space;1,&&space;-1&space;\end{Bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;f:M\rightarrow\begin{Bmatrix}&space;1,&&space;-1&space;\end{Bmatrix}" title="f:M\rightarrow\begin{Bmatrix} 1,& -1 \end{Bmatrix}"></a> or <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;f:M\rightarrow&space;R" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;f:M\rightarrow&space;R" title="f:M\rightarrow R"></a>  </li>
+<li>Dimensionality reduction: <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;f:M\rightarrow&space;R^{n},n\ll&space;N" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;f:M\rightarrow&space;R^{n},n\ll&space;N" title="f:M\rightarrow R^{n},n\ll N"></a>  </li>
+</ul>
+<h2 id="Dimensionality-Reduction"><a href="#Dimensionality-Reduction" class="headerlink" title="Dimensionality Reduction"></a>Dimensionality Reduction</h2><p>The problem of (nonlinear) dimensionality reduction can be defined as follows. Assume we have a dataset represented in a n × D matrix X consisting of n datavectors <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;x_{i}(i\in&space;\begin{Bmatrix}&space;1,&space;&2,&space;&...&space;&n&space;\end{Bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;x_{i}(i\in&space;\begin{Bmatrix}&space;1,&space;&2,&space;&...&space;&n&space;\end{Bmatrix}" title="x_{i}(i\in \begin{Bmatrix} 1, &2, &... &n \end{Bmatrix}"></a> with dimensionality D. Assume further that this dataset has intrinsic dimensionality d (where d &lt; D, and often <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;d\ll&space;D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;d\ll&space;D" title="d\ll D"></a> Dimensionality reduction techniques transform dataset X with dimensionality D into a new dataset Y with dimensionality d, while retaining the geometry of the data as much as possible. In general, neither the geometry of the data manifold, nor the intrinsic dimensionality d of the dataset X are known.<br>As below picture shows, We can subdivide techniques for dimensionality reduction into convex and non-convex techniques. Convex techniques optimize an objective function that does not contain any local optima, whereas non convex techniques optimize objective functions that do contain local optima.<br><img src="./3.png" alt="Alt text">  </p>
+<h3 id="Convex-techniques-for-Dimensionality-Reduction"><a href="#Convex-techniques-for-Dimensionality-Reduction" class="headerlink" title="Convex techniques for Dimensionality Reduction"></a>Convex techniques for Dimensionality Reduction</h3><p>Convex techniques for dimensionality reduction optimize an objective function that does not contain any local optima, i.e., the solution space is convex. We subdivide convex dimensionality reduction techniques into techniques that perform an eigendecomposition of a full matrix and those that perform an eigendecomposition<br>of a sparse matrix.<br>Firstly, we talk about Full spectral techniques for dimensionality reduction. Full spectral techniques for dimensionality reduction perform an eigendecomposition of a full matrix that captures the covariances between dimensions or the pairwise similarities between datapoints. In this subsection, I will discuss four popular techniques 1)PCA, 2)Kernel PCA, 3)Isomap, 4) Maximum Variance Unfolding.  </p>
+<h4 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h4><p>Principal Components Analysis (PCA) [98, 65] is by far the most popular linear techniquea for dimensionality reduction. It performs dimensionality reduction by embedding the data into a linear subspace of lower dimensionality. PCA constructs a low-dimensional representation of the data that describes as much of the variance in the data as possible. This is done by finding a linear basis of reduced dimensionality for the data, in which the amount of variance in the data is maximal. Now let’s derive the PCA.<br><img src="./4.png" alt="Alt text"><br>Given a set of data, <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\begin{Bmatrix}&space;\vec{z_{1}&space;}&&space;\vec{z_{2}&space;}&space;&&space;...&space;&&space;\vec{z_{n}&space;}&space;\end{Bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\begin{Bmatrix}&space;\vec{z_{1}&space;}&&space;\vec{z_{2}&space;}&space;&&space;...&space;&&space;\vec{z_{n}&space;}&space;\end{Bmatrix}" title="\begin{Bmatrix} \vec{z_{1} }& \vec{z_{2} } & ... & \vec{z_{n} } \end{Bmatrix}"></a>, Centralization is expressed as <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\begin{Bmatrix}&space;\vec{x_{1}}&space;&&space;\vec{x_{2}}&space;&&space;...&space;&&space;\vec{x_{n}}&space;\end{Bmatrix}=\begin{Bmatrix}&space;\vec{z_{1}}-\vec{u},&space;&&space;\vec{z_{2}}-\vec{u},&space;&&space;...,&space;&&space;\vec{z_{n}}-\vec{u}\end{Bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\begin{Bmatrix}&space;\vec{x_{1}}&space;&&space;\vec{x_{2}}&space;&&space;...&space;&&space;\vec{x_{n}}&space;\end{Bmatrix}=\begin{Bmatrix}&space;\vec{z_{1}}-\vec{u},&space;&&space;\vec{z_{2}}-\vec{u},&space;&&space;...,&space;&&space;\vec{z_{n}}-\vec{u}\end{Bmatrix}" title="\begin{Bmatrix} \vec{x_{1}} & \vec{x_{2}} & ... & \vec{x_{n}} \end{Bmatrix}=\begin{Bmatrix} \vec{z_{1}}-\vec{u}, & \vec{z_{2}}-\vec{u}, & ..., & \vec{z_{n}}-\vec{u}\end{Bmatrix}"></a>, where <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\vec{u}=1/n\sum_{i=1}^{n}\vec{z_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\vec{u}=1/n\sum_{i=1}^{n}\vec{z_{i}}" title="\vec{u}=1/n\sum_{i=1}^{n}\vec{z_{i}}"></a>.<br><a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\vec{u}=\frac{1}{n}\sum_{i=1}^{n}\vec{z_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\vec{u}=\frac{1}{n}\sum_{i=1}^{n}\vec{z_{i}}" title="\vec{u}=\frac{1}{n}\sum_{i=1}^{n}\vec{z_{i}}"></a><br>The centralized data scatter distribution in the direction of U1, which means that absolute value reach maximum when projected in the U1 direction(can also be said that the maximum variance). Calculation method of projection is inner product between x and  u1, and maxmize this function: <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\frac{1}{n}\sum_{i=1}^{n}\begin{vmatrix}&space;\vec{x_{i}}\cdot\vec{u_{1}}&space;\end{vmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\frac{1}{n}\sum_{i=1}^{n}\begin{vmatrix}&space;\vec{x_{i}}\cdot\vec{u_{1}}&space;\end{vmatrix}" title="\frac{1}{n}\sum_{i=1}^{n}\begin{vmatrix} \vec{x_{i}}\cdot\vec{u_{1}} \end{vmatrix}"></a>, it’s also equal to these functions:<br><a href="https://www.codecogs.com/eqnedit.php?latex=\frac{1}{n}\sum_{i=1}^{n}\begin{vmatrix}&space;\vec{x_{i}&space;}\cdot&space;\vec{u_{1}&space;}&space;\end{vmatrix}^{2}=\frac{1}{n}\sum_{i=1}^{n}(\vec{x_{i}&space;}\cdot&space;\vec{u_{1}&space;})^{2}=\frac{1}{n}\sum_{i=1}^{n}(x_{i}^{T}u_{1})^{2}=\frac{1}{n}\sum_{i=1}^{n}(x_{i}^{T}u_{1})^{T}(x_{i}^{T}u_{1})=\frac{1}{n}\sum_{i=1}^{n}(u_{1}^{T}x_{i}x_{i}^{T}u_{1})=\frac{1}{n}u_{1}^{T}(\sum_{i=1}^{n}x_{i}x_{i}^{T})u_{1}=\frac{1}{n}u_{1}^{T}XX^{T}u_{1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{1}{n}\sum_{i=1}^{n}\begin{vmatrix}&space;\vec{x_{i}&space;}\cdot&space;\vec{u_{1}&space;}&space;\end{vmatrix}^{2}=\frac{1}{n}\sum_{i=1}^{n}(\vec{x_{i}&space;}\cdot&space;\vec{u_{1}&space;})^{2}=\frac{1}{n}\sum_{i=1}^{n}(x_{i}^{T}u_{1})^{2}=\frac{1}{n}\sum_{i=1}^{n}(x_{i}^{T}u_{1})^{T}(x_{i}^{T}u_{1})=\frac{1}{n}\sum_{i=1}^{n}(u_{1}^{T}x_{i}x_{i}^{T}u_{1})=\frac{1}{n}u_{1}^{T}(\sum_{i=1}^{n}x_{i}x_{i}^{T})u_{1}=\frac{1}{n}u_{1}^{T}XX^{T}u_{1}" title="\frac{1}{n}\sum_{i=1}^{n}\begin{vmatrix} \vec{x_{i} }\cdot \vec{u_{1} } \end{vmatrix}^{2}=\frac{1}{n}\sum_{i=1}^{n}(\vec{x_{i} }\cdot \vec{u_{1} })^{2}=\frac{1}{n}\sum_{i=1}^{n}(x_{i}^{T}u_{1})^{2}=\frac{1}{n}\sum_{i=1}^{n}(x_{i}^{T}u_{1})^{T}(x_{i}^{T}u_{1})=\frac{1}{n}\sum_{i=1}^{n}(u_{1}^{T}x_{i}x_{i}^{T}u_{1})=\frac{1}{n}u_{1}^{T}(\sum_{i=1}^{n}x_{i}x_{i}^{T})u_{1}=\frac{1}{n}u_{1}^{T}XX^{T}u_{1}"></a>, where <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;XX^{T}=\sum_{i=1}^{n}x_{i}x_{i}^{T}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;XX^{T}=\sum_{i=1}^{n}x_{i}x_{i}^{T}" title="XX^{T}=\sum_{i=1}^{n}x_{i}x_{i}^{T}"></a><br>So the equation to be maxmized become <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\frac{1}{n}u_{1}^{T}XX^{T}u_{1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\frac{1}{n}u_{1}^{T}XX^{T}u_{1}" title="\frac{1}{n}u_{1}^{T}XX^{T}u_{1}"></a>. We want to find the maximum value of this formula. We first have to prove whether there is a maximum value. Suppose that one of the eigenvalues of XX’ is <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\lambda" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\lambda" title="\lambda"></a>, the corresponding eigenvector is <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\varepsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\varepsilon" title="\varepsilon"></a>, then:<br><a href="https://www.codecogs.com/eqnedit.php?latex=XX^{T}\varepsilon&space;=\lambda&space;\varepsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?XX^{T}\varepsilon&space;=\lambda&space;\varepsilon" title="XX^{T}\varepsilon =\lambda \varepsilon"></a><br><a href="https://www.codecogs.com/eqnedit.php?latex=(XX^{T}\varepsilon)^{T}\varepsilon&space;=(\lambda&space;\varepsilon&space;)^{T}&space;\varepsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(XX^{T}\varepsilon)^{T}\varepsilon&space;=(\lambda&space;\varepsilon&space;)^{T}&space;\varepsilon" title="(XX^{T}\varepsilon)^{T}\varepsilon =(\lambda \varepsilon )^{T} \varepsilon"></a><br><a href="https://www.codecogs.com/eqnedit.php?latex=\varepsilon&space;^{T}XX^{T}\varepsilon&space;=\lambda&space;\varepsilon&space;^{T}&space;\varepsilon&space;=(X^{T}\varepsilon&space;)^{T}(X^{T}\varepsilon&space;)=\begin{Vmatrix}&space;X^{T}\varepsilon&space;\end{Vmatrix}^{2}=\lambda&space;\varepsilon&space;^{T}\varepsilon=\lambda&space;\begin{Vmatrix}&space;\varepsilon&space;\end{Vmatrix}^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\varepsilon&space;^{T}XX^{T}\varepsilon&space;=\lambda&space;\varepsilon&space;^{T}&space;\varepsilon&space;=(X^{T}\varepsilon&space;)^{T}(X^{T}\varepsilon&space;)=\begin{Vmatrix}&space;X^{T}\varepsilon&space;\end{Vmatrix}^{2}=\lambda&space;\varepsilon&space;^{T}\varepsilon=\lambda&space;\begin{Vmatrix}&space;\varepsilon&space;\end{Vmatrix}^{2}" title="\varepsilon ^{T}XX^{T}\varepsilon =\lambda \varepsilon ^{T} \varepsilon =(X^{T}\varepsilon )^{T}(X^{T}\varepsilon )=\begin{Vmatrix} X^{T}\varepsilon \end{Vmatrix}^{2}=\lambda \varepsilon ^{T}\varepsilon=\lambda \begin{Vmatrix} \varepsilon \end{Vmatrix}^{2}"></a><br><a href="https://www.codecogs.com/eqnedit.php?latex=\left&space;\|&space;X^{T}\varepsilon&space;\right&space;\|^{2}=\lambda&space;\left&space;\|&space;\varepsilon&space;\right&space;\|^{2}\rightarrow&space;\lambda&space;\geq&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left&space;\|&space;X^{T}\varepsilon&space;\right&space;\|^{2}=\lambda&space;\left&space;\|&space;\varepsilon&space;\right&space;\|^{2}\rightarrow&space;\lambda&space;\geq&space;0" title="\left \| X^{T}\varepsilon \right \|^{2}=\lambda \left \| \varepsilon \right \|^{2}\rightarrow \lambda \geq 0"></a><br>The proof is finished. For two order form of a semi positive definite matrix, there is a maximum value. Now the problem is how to find the maximum value of the objective function.We can solve the maximum value by constructing the Lagrange function.<br><a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;f(u_{1})=u_{1}^{T}XX^{T}u_{1}&plus;\lambda&space;(1-u_{1}^{T}u_{1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;f(u_{1})=u_{1}^{T}XX^{T}u_{1}&plus;\lambda&space;(1-u_{1}^{T}u_{1})" title="f(u_{1})=u_{1}^{T}XX^{T}u_{1}+\lambda (1-u_{1}^{T}u_{1})"></a><br><a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;f}{\partial&space;u_{1}}=2XX^{T}u_{1}-2\lambda&space;u_{1}=0\rightarrow&space;XX^{T}u_{1}=\lambda&space;u_{1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;f}{\partial&space;u_{1}}=2XX^{T}u_{1}-2\lambda&space;u_{1}=0\rightarrow&space;XX^{T}u_{1}=\lambda&space;u_{1}" title="\frac{\partial f}{\partial u_{1}}=2XX^{T}u_{1}-2\lambda u_{1}=0\rightarrow XX^{T}u_{1}=\lambda u_{1}"></a><br><a href="https://www.codecogs.com/eqnedit.php?latex=u_{1}^{T}XX^{T}u_{1}=\lambda&space;u_{1}^{T}u_{1}=\lambda" target="_blank"><img src="https://latex.codecogs.com/gif.latex?u_{1}^{T}XX^{T}u_{1}=\lambda&space;u_{1}^{T}u_{1}=\lambda" title="u_{1}^{T}XX^{T}u_{1}=\lambda u_{1}^{T}u_{1}=\lambda"></a><br>According to result, we can know that the maximum value is taken, the maximum value of the target is obtained.</p>
+<h4 id="Isomap"><a href="#Isomap" class="headerlink" title="Isomap"></a>Isomap</h4><p><img src="./5.png" alt="Alt text"><br><img src="./6.png" alt="Alt text">  </p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>GengZhi</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/gengzhi.github.com/2018/02/04/reinforcement-learning-2/">
+        <!--reinforcement learning(2)--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2018 GengZhi. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+        </footer>
+    </body>
+</html>
+
+
